@@ -1,0 +1,142 @@
+.docWhole{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.newsname{
+    font-size: 5rem;
+    font-weight: 800;
+    width: 80%;
+    cursor: pointer;
+}
+
+.search{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    width: 80%;
+
+    input{
+        padding: .2rem;
+        border: none;
+        font-size: 1.5rem;
+        outline: none;
+        transition: all .5s;
+        border-bottom: 1px solid #999;
+    }
+
+    input::placeholder{
+        color: #999;
+        transition: all .5s;
+    }
+    input:focus{
+        border-bottom: 1px solid black;
+    }
+    input:focus::placeholder{
+        color: #CCC;
+        opacity: 70%;
+    }
+    
+}
+
+.doc{
+    display: grid;
+    // align-items: left;
+    // justify-content: center;
+    // flex-direction: column;
+    width: 80%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+
+    .docanimate{
+        animation: fadeDown .5s forwards;
+    }
+
+    @keyframes fadeDown{
+        0%{
+            opacity:0;
+            transform: translateY(-20px);
+        }
+        100%{
+            opacity:1;
+            transform: translateY(0);
+        }
+    }
+
+    .docview{
+        margin-top: 2rem;
+        width: 90%;
+    
+    }
+
+    .headline{
+        font-size: 1.5rem;
+        font-weight: 500;
+
+    }
+
+    .info{
+        display: flex;
+        width: 100%;
+        align-content: space-between;
+    }
+
+    .paragraph{
+        margin-top: .5rem;
+        text-decoration: none;
+        color: black;
+    }
+}
+
+@media (max-width: 700px){
+    .newsname{
+        font-size: 3rem;
+        font-weight: 800;
+    }
+    .doc{
+        width: 80%;
+        grid-template-columns: 100%;
+
+        .docview{
+            width: 100%;
+        }
+
+        .info{
+            font-size: .7rem;
+        }
+
+        .headline{
+            font-size: 1.5rem;
+    
+        }
+    
+
+
+        .paragraph{
+            display: none;
+        }
+    }
+    
+}
+
+
+.keywords{
+    margin-top: .8rem;
+
+    .keyword{
+        background-color: #777;
+        color: white;
+        padding: .15rem;
+        padding-left: .25rem;
+        padding-right: .35rem;
+        margin: .1rem;
+        margin-left: 0;
+        margin-right: .5rem;
+        font-size: .6rem;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+}
