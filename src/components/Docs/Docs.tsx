@@ -3,6 +3,7 @@ import {Keyword, Headline, Doc} from '../../API';
 import classNames from 'classnames';
 import styles from './Docs.module.css';
 import DocView from './Doc';
+import useWindowDimensions from '../../utils/useWindowDimensions';
 
 type Props = {
     docs: Doc[];
@@ -15,15 +16,31 @@ function Docs(props: Props){
     const [currentPos, setCurrentPos] = useState(0);
     const [currentPosDocs, setCurrentPosDocs] = useState<Doc[]>(docs);
     const [pageTransitAnimation, setPageTranistAnimation] = useState(false);
-    const DISPLAYED_DOCS = 8;
+    const [displayedDocs, setDisplayedDocs] = useState(8);
+
+    const {height, width} = useWindowDimensions();
+
+    useEffect(()=>{
+        if (width < 700){
+            setDisplayedDocs(Infinity)
+        } else{
+            setDisplayedDocs(8)
+        }
+    }, [width])
+
+    var dateString;
 
     function getDate(){
         var date = new Date();
         var year = date.getFullYear()-1;
-        var tempmonth = date.getMonth()+1;
-        var month = (tempmonth<10) ? `0${tempmonth}` : tempmonth;
-        var day = date.getDate();
-        var dateString = (month==2 && day==29) ?  `${year}-${month}-28` : `${year}-${month}-${day}`;
+        var month = oneDigitHandler(date.getMonth()+1);
+        var day = oneDigitHandler(date.getDate()+1);;
+
+        function oneDigitHandler(digit: number){
+            return (digit<10) ? `0${digit}` : digit;
+        }
+        dateString = (month===2 && day===29) ?  `${year}-${month}-28` : `${year}-${month}-${day}`;
+        console.log(dateString);
         return dateString;
     }
 
@@ -63,9 +80,16 @@ function Docs(props: Props){
     }
     console.log(searchValue);
 
+    const derivedDate = getDate();
+   
+
     useEffect(()=>{
+        console.log(derivedDate);
         setFilteredDocs(docs.filter(doc=>{
-            return doc.pub_date.includes(getDate())
+            return doc.pub_date.includes(derivedDate)
+        })
+        .filter(doc=>{
+            return !doc.headline.main.includes('corrections');
         }))
     }, []);
 
@@ -74,7 +98,7 @@ function Docs(props: Props){
             return search(doc, searchValue)!=0
         })
         .filter(doc=>{
-            return doc.pub_date.includes(getDate())
+            return doc.pub_date.includes(derivedDate)
         })
         .sort(function(doc1, doc2){
             return parseInt(doc1.print_page)-parseInt(doc2.print_page)
@@ -83,7 +107,7 @@ function Docs(props: Props){
 
     useEffect(()=>{
         setCurrentPosDocs(
-            filteredDocs.slice(DISPLAYED_DOCS*currentPos , DISPLAYED_DOCS*(currentPos+1))
+            filteredDocs.slice(displayedDocs*currentPos , displayedDocs*(currentPos+1))
         )
         let animationTimer = setTimeout(()=>setPageTranistAnimation(true), 3000);
         return() =>{
@@ -107,7 +131,7 @@ function Docs(props: Props){
             {currentPos>0 && <div className={styles.prevButton} onClick={()=>setCurrentPos(currentPos-1)}>
                 Previous Page
             </div>}
-            {currentPos<filteredDocs.length/DISPLAYED_DOCS && <div className={styles.nextButton} onClick={()=>setCurrentPos(currentPos+1)}>
+            {currentPos<filteredDocs.length/displayedDocs && <div className={styles.nextButton} onClick={()=>setCurrentPos(currentPos+1)}>
                 Next Page
             </div>}
     </div>
@@ -115,7 +139,10 @@ function Docs(props: Props){
 
 
     return(
-        <div className={styles.docWhole}>
+    <div className={styles.docWhole}>
+        <div className={styles.date}>
+            {dateString}
+        </div>
         <div className={styles.newsname} onClick={defaultSearch}>
             Pseudo-New York Times
         </div>

@@ -4,6 +4,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .newsname{
@@ -11,12 +12,14 @@
     font-weight: 800;
     width: 80%;
     cursor: pointer;
+    text-align: center;
 }
 
 .search{
     margin-top: .5rem;
     margin-bottom: .5rem;
     width: 80%;
+    text-align: center;
 
     input{
         padding: .2rem;
@@ -74,19 +77,43 @@
     .headline{
         font-size: 1.5rem;
         font-weight: 500;
+        margin-bottom: .5rem
 
     }
 
     .info{
         display: flex;
         width: 100%;
-        align-content: space-between;
+        align-items: space-between;
+        justify-content: space-between;
+        margin-bottom: .5rem;
     }
 
     .paragraph{
         margin-top: .5rem;
         text-decoration: none;
         color: black;
+    }
+}
+
+.buttons{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
+    .prevButton{
+        position: fixed;
+        left: 2rem;
+        width: 5rem;
+        cursor: pointer;
+        top: 50%;
+    }
+    .nextButton{
+        position: fixed;
+        right: 2rem;
+        width: 5rem;
+        cursor: pointer;
+        top: 50%;
     }
 }
 
@@ -118,7 +145,9 @@
             display: none;
         }
     }
-    
+    .buttons{
+        display: none;
+    }
 }
 
 

@@ -1,6 +1,16 @@
+
+
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
+const mongoose = require('mongoose');
+
+//Moongoose Connection
+mongoose.connect(process.env.DATABASE_URL);
+const db = mongoose.connection;
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('conencted to databse'));
+
 
 const PORT = 5000;
 const app = express();

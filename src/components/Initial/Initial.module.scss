@@ -2,23 +2,17 @@
     font-family: "Franklin Gothic"
 }
 
-:root{
-    --primary-color: #252525;
-    --secondary-color: #525252;
-}
-
 
 .gridView{
     display: grid;
     grid-template-columns: repeat(10, 10vw);
     grid-template-rows: repeat(10, 10vh);
 
-    div[color-change = 'true']{
-        animation: changeColor 2s;
-    }
+
+    
 
     div:nth-child(1){
-        background: linear-gradient(var(--primary-color), var(--secondary-color));
+        background: linear-gradient(#252525, #525252);
         grid-column: 1/3;
         grid-row: 1/4;
     }
@@ -82,17 +76,7 @@
         grid-column: 1/6;
         grid-row: 9/11;
     }
-
-    @keyframes changeColor{
-        100%{
-            --primary-color: #525252;
-            --secondary-color: #252525;
-            background: linear-gradient(#525252, #787878);
-        }
-    }
 }
-
-
 
 
 

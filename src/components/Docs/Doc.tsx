@@ -37,11 +37,10 @@ function DocView(props: Props){
             ))
             }
         </div>
-        <a href={doc.web_url} style={{textDecoration: 'none', color: 'black'}}>
+    
         <div className={styles.paragraph}>
             {doc.lead_paragraph}
         </div>
-        </a>
     </div>
     )
 }

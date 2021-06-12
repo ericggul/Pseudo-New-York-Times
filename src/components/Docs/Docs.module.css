@@ -13,6 +13,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .newsname {
@@ -20,12 +21,14 @@
   font-weight: 800;
   width: 80%;
   cursor: pointer;
+  text-align: center;
 }
 
 .search {
   margin-top: .5rem;
   margin-bottom: .5rem;
   width: 80%;
+  text-align: center;
 }
 
 .search input {
@@ -135,6 +138,7 @@
 .doc .headline {
   font-size: 1.5rem;
   font-weight: 500;
+  margin-bottom: .5rem;
 }
 
 .doc .info {
@@ -142,14 +146,41 @@
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  -ms-flex-line-pack: justify;
-      align-content: space-between;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: .5rem;
 }
 
 .doc .paragraph {
   margin-top: .5rem;
   text-decoration: none;
   color: black;
+}
+
+.buttons {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.buttons .prevButton {
+  position: fixed;
+  left: 2rem;
+  width: 5rem;
+  cursor: pointer;
+  top: 50%;
+}
+
+.buttons .nextButton {
+  position: fixed;
+  right: 2rem;
+  width: 5rem;
+  cursor: pointer;
+  top: 50%;
 }
 
 @media (max-width: 700px) {
@@ -172,6 +203,9 @@
     font-size: 1.5rem;
   }
   .doc .paragraph {
+    display: none;
+  }
+  .buttons {
     display: none;
   }
 }

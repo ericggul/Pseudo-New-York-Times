@@ -1,3 +1,5 @@
+
+
 export type Headline = {
     main: string;
     print_headline: string;
@@ -23,12 +25,13 @@ export type Doc ={
     word_count: number;
     web_url: string;
     print_page: string;
+    print_section: string;
 }
 
 
 
-
 export const fetchData = async() =>{
+
     const endpoint = `http://localhost:5000/getData`;
     const data = await(await fetch(endpoint)).json();
     console.log(data.response.docs);
