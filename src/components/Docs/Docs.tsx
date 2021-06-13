@@ -1,16 +1,20 @@
 import react, {useState, useEffect} from 'react';
+import { match, useLocation } from 'react-router-dom';
 import {Keyword, Headline, Doc} from '../../API';
 import classNames from 'classnames';
 import styles from './Docs.module.css';
 import DocView from './Doc';
 import useWindowDimensions from '../../utils/useWindowDimensions';
 
-type Props = {
-    docs: Doc[];
+interface LocationState {
+    docs : Doc[];
 }
 
-function Docs(props: Props){
-    const {docs} = props;
+function Docs(){
+    const location = useLocation<LocationState>();
+    const { docs } = location.state;
+
+
     const [searchValue, setSearchValue] = useState("");
     const [filteredDocs, setFilteredDocs] = useState<Doc[]>(docs);
     const [currentPos, setCurrentPos] = useState(0);
@@ -115,48 +119,60 @@ function Docs(props: Props){
         }
     }, [currentPos, filteredDocs]);
 
+    const header = 
+        <div className={styles.newsname} onClick={defaultSearch}>
+            Pseudo-New York Times
+        </div>
+
+    const date =
+        <div className={styles.date}>
+            {dateString}
+        </div>
+
     const searchElement = 
-    <div className={styles.search}>
-        <input 
-            type="text" 
-            value={searchValue} 
-            onChange={e => setSearchValue(e.target.value)}
-            placeholder="Searh for Articles"
-        />
-        {searchValue && <div>Showing {filteredDocs.length} articles</div>}
-    </div>
+        <div className={styles.search}>
+            <input 
+                type="text" 
+                value={searchValue} 
+                onChange={e => setSearchValue(e.target.value)}
+                placeholder="Searh for Articles"
+            />
+            {searchValue && <div>Showing {filteredDocs.length} articles</div>}
+        </div>
 
     const buttonElement = 
-    <div className={styles.buttons}>
+        <div className={styles.buttons}>
             {currentPos>0 && <div className={styles.prevButton} onClick={()=>setCurrentPos(currentPos-1)}>
                 Previous Page
             </div>}
             {currentPos<filteredDocs.length/displayedDocs && <div className={styles.nextButton} onClick={()=>setCurrentPos(currentPos+1)}>
                 Next Page
             </div>}
-    </div>
+        </div>
+    
+    const documents = 
+        <div className={classNames(styles.doc, pageTransitAnimation && styles.docanimate)}>
+            {currentPosDocs.map((doc,i)=>(
+                <DocView 
+                    key={i} 
+                    doc={doc}
+                    callback={keywordFilterHandler}
+                />
+            ))}
+        </div>
 
 
 
     return(
     <div className={styles.docWhole}>
-        <div className={styles.date}>
-            {dateString}
+        <div className={styles.left_container}>
+            {header}
+            {documents}
         </div>
-        <div className={styles.newsname} onClick={defaultSearch}>
-            Pseudo-New York Times
+        <div className={styles.right_container}>
+            {header}
+            {documents}
         </div>
-        {searchElement}
-        <div className={classNames(styles.doc, pageTransitAnimation && styles.docanimate)}>
-                {currentPosDocs.map((doc,i)=>(
-                    <DocView 
-                        key={i} 
-                        doc={doc}
-                        callback={keywordFilterHandler}
-                    />
-                ))}
-        </div>
-        {buttonElement}
     </div>
     )
 }

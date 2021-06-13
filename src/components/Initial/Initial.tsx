@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Route, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Switch, Redirect,    useHistory, BrowserRouter as Router} from 'react-router-dom';
 import { Doc, fetchData} from '../../API';
 import Docs from '../Docs/Docs';
 import DocView from '../Docs/Doc';
@@ -11,6 +11,7 @@ function Initial() {
     const [loading, setLoading] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [docs, setDocs] = useState<Doc[]>([]);
+    const history = useHistory();
 
     let button; 
     let loadingjsx;
@@ -21,9 +22,21 @@ function Initial() {
         setLoading(true)
         const getDocs = await fetchData();
         setDocs(getDocs);
+        movePage(getDocs);
         setDataLoaded(true)
         setLoading(false)
     }
+
+    const movePage = (docs: [Doc]) =>{
+        history.push({
+            pathname: '/Docs',
+            state: {
+                docs: docs
+            }
+        })
+    }
+
+
 
     if(loading){
         loadingjsx = <div className={styles.loading}>
@@ -50,15 +63,13 @@ function Initial() {
         </div>
     }
 
-    
 
     return (
-
         <div className={styles.main}>
         {grid}
-        <div className={styles.App}>
-            {button}
-        </div>
+            <div className={styles.App}>
+                {button}
+            </div>
         </div>
     );
 }

@@ -23,10 +23,10 @@ function DocView(props: Props){
                 {`${reading_speed}min read`}
             </div>
         </div>
-        <a href={doc.web_url} style={{textDecoration: 'none', color: 'black'}}>
-        <div className={styles.headline}>
-            {doc.headline.main}
-        </div>
+        <a href={doc.web_url} style={{textDecoration: 'none'}}>
+            <div className={styles.headline}>
+                {doc.headline.main}
+            </div>
         </a>
         <div className={styles.abstract}>
             {doc.abstract}

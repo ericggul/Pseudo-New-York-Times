@@ -8,18 +8,41 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+:root {
+  --black: #252525;
+}
+
+.left_container {
+  background-color: var(--black);
+  width: 50%;
+  color: white;
+  padding: 2rem;
+}
+
+.left_container .doc .docview .headline {
+  color: white;
+}
+
+.right_container {
+  background-color: white;
+  width: 50%;
+  color: var(--black);
+  padding: 2rem;
+}
+
+.right_container .doc .docview .headline {
+  color: var(--black);
 }
 
 .newsname {
   font-size: 5rem;
   font-weight: 800;
-  width: 80%;
   cursor: pointer;
   text-align: center;
 }
@@ -27,7 +50,6 @@
 .search {
   margin-top: .5rem;
   margin-bottom: .5rem;
-  width: 80%;
   text-align: center;
 }
 
@@ -90,13 +112,19 @@
 }
 
 .doc {
-  display: -ms-grid;
-  display: grid;
-  width: 80%;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .doc .docanimate {
@@ -158,7 +186,6 @@
 .doc .paragraph {
   margin-top: .5rem;
   text-decoration: none;
-  color: black;
 }
 
 .buttons {
@@ -181,33 +208,6 @@
   width: 5rem;
   cursor: pointer;
   top: 50%;
-}
-
-@media (max-width: 700px) {
-  .newsname {
-    font-size: 3rem;
-    font-weight: 800;
-  }
-  .doc {
-    width: 80%;
-    -ms-grid-columns: 100%;
-        grid-template-columns: 100%;
-  }
-  .doc .docview {
-    width: 100%;
-  }
-  .doc .info {
-    font-size: .7rem;
-  }
-  .doc .headline {
-    font-size: 1.5rem;
-  }
-  .doc .paragraph {
-    display: none;
-  }
-  .buttons {
-    display: none;
-  }
 }
 
 .keywords {

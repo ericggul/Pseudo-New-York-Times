@@ -2,15 +2,45 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    flex-direction: row;
 }
 
+:root{
+    --black: #252525;
+}
+
+.left_container{
+    background-color: var(--black);
+    width: 50%;
+    color: white;
+    padding: 2rem;
+
+    .doc{
+        .docview{
+            .headline{
+                color: white;
+            }
+        }
+    }
+}
+
+.right_container{
+    background-color: white;
+    width: 50%;
+    color: var(--black);
+    padding: 2rem;
+
+    .doc{
+        .docview{
+            .headline{
+                color: var(--black);
+            }
+        }
+    }
+}
 .newsname{
     font-size: 5rem;
     font-weight: 800;
-    width: 80%;
     cursor: pointer;
     text-align: center;
 }
@@ -18,7 +48,6 @@
 .search{
     margin-top: .5rem;
     margin-bottom: .5rem;
-    width: 80%;
     text-align: center;
 
     input{
@@ -45,13 +74,10 @@
 }
 
 .doc{
-    display: grid;
-    // align-items: left;
-    // justify-content: center;
-    // flex-direction: column;
-    width: 80%;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
 
     .docanimate{
         animation: fadeDown .5s forwards;
@@ -92,7 +118,6 @@
     .paragraph{
         margin-top: .5rem;
         text-decoration: none;
-        color: black;
     }
 }
 
@@ -117,38 +142,6 @@
     }
 }
 
-@media (max-width: 700px){
-    .newsname{
-        font-size: 3rem;
-        font-weight: 800;
-    }
-    .doc{
-        width: 80%;
-        grid-template-columns: 100%;
-
-        .docview{
-            width: 100%;
-        }
-
-        .info{
-            font-size: .7rem;
-        }
-
-        .headline{
-            font-size: 1.5rem;
-    
-        }
-    
-
-
-        .paragraph{
-            display: none;
-        }
-    }
-    .buttons{
-        display: none;
-    }
-}
 
 
 .keywords{
